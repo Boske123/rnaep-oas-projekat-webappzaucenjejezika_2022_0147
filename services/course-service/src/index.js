@@ -124,7 +124,12 @@ app.get('/api/enrollments', authRequired, async (req, res) => {
   const per_page = Math.min(parseInt(req.query.per_page, 10) || 50, 200);
   const cond = []; const params = [];
   if (course_id) { params.push(course_id); cond.push(`e.course_id=$${params.length}`); }
-  if (student_id) { params.push(student_id); cond.push(`e.student_id=$${params.length}`); }
+  // IDOR zastita: student moze da vidi ISKLJUCIVO svoje upise; teacher/admin vide sve
+  if (req.user.role === 'student') {
+    params.push(req.user.sub); cond.push(`e.student_id=$${params.length}`);
+  } else if (student_id) {
+    params.push(student_id); cond.push(`e.student_id=$${params.length}`);
+  }
   if (status && status.length) { params.push(status); cond.push(`e.status = ANY($${params.length}::text[])`); }
   if (search) { params.push(`%${search}%`); cond.push(`c.title ILIKE $${params.length}`); }
   const where = cond.length ? 'WHERE ' + cond.join(' AND ') : '';
