@@ -12,6 +12,7 @@ i prevezan na **API Gateway**; backend su nezavisni mikroservisi (princip
 *database-per-service*) sa asinhronom komunikacijom preko **Kafke**.
 
 LIN-2 - registracija i prijava korisnika.
+test
 ---
 
 ## 1. Arhitektura
