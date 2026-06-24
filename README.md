@@ -11,7 +11,7 @@ Korisnički interfejs (React + Vite) preuzet je sa predmeta **Internet tehnologi
 i prevezan na **API Gateway**; backend su nezavisni mikroservisi (princip
 *database-per-service*) sa asinhronom komunikacijom preko **Kafke**.
 
-LIN-2 - registracija i prijava korisnika
+LIN-2 - registracija i prijava korisnika.
 ---
 
 ## 1. Arhitektura
